@@ -4,6 +4,7 @@ public class Regiao {
     private Long id;
     private String cidade;
     private String uf;
+    private String zona;
     private String descricao;
     private String statusRegiao;
 
@@ -29,6 +30,14 @@ public class Regiao {
 
     public void setUf(String uf) {
         this.uf = uf;
+    }
+
+    public String getZona() {
+        return zona;
+    }
+
+    public void setZona(String zona) {
+        this.zona = zona;
     }
 
     public String getDescricao() {
