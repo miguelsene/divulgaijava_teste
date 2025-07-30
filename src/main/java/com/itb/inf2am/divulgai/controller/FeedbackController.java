@@ -14,7 +14,7 @@ import java.util.List;
 // Setter (set): Apenas modifica o valor do atributo.
 
 @RestController
-@RequestMapping("/api/v1/Feedback")
+@RequestMapping("/api/v1/feedback")
 
 public class FeedbackController {
     List<Feedback> Feedbacks = new ArrayList<>();
