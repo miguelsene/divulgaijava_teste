@@ -1,21 +1,53 @@
 package com.itb.inf2am.divulgai.model.entity;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
+@Entity
+
 public class Prestador {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 100, nullable = false)
     private String nome;
+
+    @Column(nullable = true)
     private LocalDateTime dataNascimento;
+
+    @Column(length = 11, nullable = false)
     private String cpf;
+
+    @Column(length = 20, nullable = false)
     private String genero;
+
+    @Column(length = 11, nullable = false)
     private String telefone;
+
+    @Column(length = 100, nullable = false)
     private String logradouro;
+
+    @Column(length = 10, nullable = false)
     private String numeroResidencial;
+
+    @Column(length = 100, nullable = true)
     private String complemento;
+
+    @Column(length = 8, nullable = false)
     private String cep;
+
+    @Column(length = 100, nullable = false)
     private String bairro;
+
+    @Column(length = 100, nullable = false)
     private String cidade;
+
+    @Column(length = 2, nullable = false)
     private String uf;
+
+    @Column(length = 20, nullable = false)
     private String statusPrestador;
 
     public Long getId() {

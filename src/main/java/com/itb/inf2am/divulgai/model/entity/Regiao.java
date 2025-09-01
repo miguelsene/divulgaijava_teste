@@ -1,11 +1,27 @@
 package com.itb.inf2am.divulgai.model.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+
 public class Regiao {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 50, nullable = false)
     private String cidade;
+
+    @Column(length = 2, nullable = false)
     private String uf;
+
+    @Column(length = 20, nullable = true)
     private String zona;
+
+    @Column(length = 200, nullable = false)
     private String descricao;
+
+    @Column(length = 20, nullable = false)
     private String statusRegiao;
 
     public Long getId() {

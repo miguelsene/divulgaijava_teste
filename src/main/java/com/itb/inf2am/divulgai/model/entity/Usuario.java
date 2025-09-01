@@ -21,6 +21,7 @@ public class Usuario {
     private String foto;
     @Column(length = 100, nullable = true)
     private LocalDateTime dataCadastro;
+    @Column(length = 20, nullable = false)
     private String statusUsuario;
 
     public Long getId() {

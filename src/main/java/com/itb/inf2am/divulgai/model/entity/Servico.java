@@ -10,8 +10,10 @@ public class Servico {
 
     @Column(length = 100, nullable = false)
     private String nome;
+
     @Column(length = 200, nullable = false)
     private String descricao;
+
     @Column(length = 200, nullable = false)
     private String statusServico;
 
