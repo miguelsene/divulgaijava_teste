@@ -1,9 +1,21 @@
 package com.itb.inf2am.divulgai.model.entity;
 
+import jakarta.persistence.*;
+
+@Entity
+
 public class Categoria {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column (length = 100, nullable = false)
     private String nome;
+
+    @Column (length = 200, nullable = false)
     private String descricao;
+
+    @Column (length = 20, nullable = false)
     private String statusCategoria;
 
     public Long getId() {
