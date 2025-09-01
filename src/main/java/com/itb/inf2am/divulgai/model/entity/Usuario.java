@@ -1,14 +1,25 @@
 package com.itb.inf2am.divulgai.model.entity;
 
 import java.time.LocalDateTime;
+import jakarta.persistence.*;
+@Entity
+@Table(name = "Usuario")
 
 public class Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 100, nullable = true)
     private String nome;
+    @Column(length = 100, nullable = true)
     private String email;
+    @Column(length = 100, nullable = true)
     private String senha;
+    @Column(length = 100, nullable = false)
     private String nivelAcesso;
+    @Column(length = 10, nullable = true)
     private String foto;
+    @Column(length = 100, nullable = true)
     private LocalDateTime dataCadastro;
     private String statusUsuario;
 
