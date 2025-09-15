@@ -22,7 +22,7 @@ public class Usuario {
     @Column(length = 100, nullable = true)
     private LocalDateTime dataCadastro;
     @Column(length = 20, nullable = false)
-    private String statusUsuario;
+    private boolean statusUsuario;
 
     public Long getId() {
         return id;
@@ -80,11 +80,11 @@ public class Usuario {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getStatusUsuario() {
+    public boolean getStatusUsuario() {
         return statusUsuario;
     }
 
-    public void setStatusUsuario(String statusUsuario) {
+    public void setStatusUsuario(boolean statusUsuario) {
         this.statusUsuario = statusUsuario;
     }
 }

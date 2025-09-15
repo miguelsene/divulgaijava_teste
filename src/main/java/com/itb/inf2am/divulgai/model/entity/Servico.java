@@ -48,7 +48,7 @@ public class Servico {
         return statusServico;
     }
 
-    public void setStatusServico(String statusServico) {
+    public void setStatusServico(boolean statusServico) {
         this.statusServico = statusServico;
     }
 

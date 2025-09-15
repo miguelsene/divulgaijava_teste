@@ -68,7 +68,7 @@ public class Regiao {
         return statusRegiao;
     }
 
-    public void setStatusRegiao(String statusRegiao) {
+    public void setStatusRegiao(boolean statusRegiao) {
         this.statusRegiao = statusRegiao;
     }
 }

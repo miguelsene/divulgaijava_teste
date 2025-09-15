@@ -46,7 +46,7 @@ public class Contato {
         return statusContato;
     }
 
-    public void setStatusContato(String statusContato) {
+    public void setStatusContato(boolean statusContato) {
         this.statusContato = statusContato;
     }
 }

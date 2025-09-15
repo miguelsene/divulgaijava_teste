@@ -46,7 +46,7 @@ public class Categoria {
         return statusCategoria;
     }
 
-    public void setStatusCategoria(String statusCategoria) {
+    public void setStatusCategoria(boolean statusCategoria) {
         this.statusCategoria = statusCategoria;
     }
 }

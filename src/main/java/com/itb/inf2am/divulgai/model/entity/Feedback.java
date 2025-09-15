@@ -48,7 +48,7 @@ public class Feedback {
         return statusFeedback;
     }
 
-    public void setStatusFeedback(String statusFeedback) {
+    public void setStatusFeedback(boolean statusFeedback) {
         this.statusFeedback = statusFeedback;
     }
 }

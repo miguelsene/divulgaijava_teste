@@ -158,7 +158,7 @@ public class Prestador {
         return statusPrestador;
     }
 
-    public void setStatusPrestador(String statusPrestador) {
+    public void setStatusPrestador(boolean statusPrestador) {
         this.statusPrestador = statusPrestador;
     }
 }
