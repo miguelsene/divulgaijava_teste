@@ -24,7 +24,7 @@ public class RegiaoController {
         r1.setUf("SP");
         r1.setZona("ZONA LESTE");
         r1.setDescricao("Atende toda a região do Engenho Novo e proximidades");
-        r1.setStatusRegiao("ATIVO");
+        r1.setStatusRegiao(true);
 
         Regiao r2 = new Regiao();
         r2.setId(2L);
@@ -32,7 +32,7 @@ public class RegiaoController {
         r2.setUf("SP");
         r2.setZona("ZONA LESTE");
         r2.setDescricao("Atende toda a região central de Osasco e bairros adjacentes");
-        r2.setStatusRegiao("ATIVO");
+        r2.setStatusRegiao(true);
 
         Regiao r3 = new Regiao();
         r3.setId(3L);
@@ -40,7 +40,7 @@ public class RegiaoController {
         r3.setUf("SP");
         r3.setZona("ZONA LESTE");
         r3.setDescricao("Atende bairros como Vila Dirce, Ariston e Centro");
-        r3.setStatusRegiao("ATIVO");
+        r3.setStatusRegiao(true);
 
         Regiao r4 = new Regiao();
         r4.setId(4L);
@@ -48,7 +48,7 @@ public class RegiaoController {
         r4.setUf("SP");
         r4.setZona("ZONA LESTE");
         r4.setDescricao("Atende bairros históricos e condomínios residenciais");
-        r4.setStatusRegiao("ATIVO");
+        r4.setStatusRegiao(true);
 
 
 

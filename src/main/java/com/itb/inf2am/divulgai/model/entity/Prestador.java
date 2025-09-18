@@ -48,7 +48,7 @@ public class Prestador {
     private String uf;
 
     @Column(length = 20, nullable = false)
-    private String statusPrestador;
+    private boolean statusPrestador;
 
     public Long getId() {
         return id;
@@ -154,7 +154,7 @@ public class Prestador {
         this.uf = uf;
     }
 
-    public String getStatusPrestador() {
+    public boolean getStatusPrestador() {
         return statusPrestador;
     }
 

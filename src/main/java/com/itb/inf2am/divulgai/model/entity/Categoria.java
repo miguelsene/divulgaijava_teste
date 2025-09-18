@@ -16,7 +16,7 @@ public class Categoria {
     private String descricao;
 
     @Column (length = 20, nullable = false)
-    private String statusCategoria;
+    private boolean statusCategoria;
 
     public Long getId() {
         return id;
@@ -42,7 +42,7 @@ public class Categoria {
         this.descricao = descricao;
     }
 
-    public String getStatusCategoria() {
+    public boolean isStatusCategoria() {
         return statusCategoria;
     }
 

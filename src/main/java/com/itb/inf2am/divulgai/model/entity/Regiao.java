@@ -22,7 +22,7 @@ public class Regiao {
     private String descricao;
 
     @Column(length = 20, nullable = false)
-    private String statusRegiao;
+    private boolean statusRegiao;
 
     public Long getId() {
         return id;
@@ -64,7 +64,7 @@ public class Regiao {
         this.descricao = descricao;
     }
 
-    public String getStatusRegiao() {
+    public boolean getStatusRegiao() {
         return statusRegiao;
     }
 

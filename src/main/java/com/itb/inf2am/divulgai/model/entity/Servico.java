@@ -15,7 +15,7 @@ public class Servico {
     private String descricao;
 
     @Column(length = 200, nullable = false)
-    private String statusServico;
+    private boolean statusServico;
 
     @Column(nullable = false) //REVISAR
     private String foto;
@@ -44,7 +44,7 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public String getStatusServico() {
+    public boolean getStatusServico() {
         return statusServico;
     }
 

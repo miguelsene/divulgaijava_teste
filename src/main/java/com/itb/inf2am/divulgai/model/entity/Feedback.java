@@ -18,7 +18,7 @@ public class Feedback {
    private LocalDateTime dataCadastro;
 
     @Column(length = 20, nullable = false)
-   private String statusFeedback;
+   private boolean statusFeedback;
 
     public Long getId() {
         return id;
@@ -44,7 +44,7 @@ public class Feedback {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getStatusFeedback() {
+    public boolean getStatusFeedback() {
         return statusFeedback;
     }
 

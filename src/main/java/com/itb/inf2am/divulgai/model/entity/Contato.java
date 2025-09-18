@@ -16,7 +16,7 @@ public class Contato {
     private String link;
 
     @Column(length = 20, nullable = false)
-    private String statusContato;
+    private boolean statusContato;
 
     public Long getId() {
         return id;
@@ -42,7 +42,7 @@ public class Contato {
         this.link = link;
     }
 
-    public String getStatusContato() {
+    public boolean getStatusContato() {
         return statusContato;
     }
 

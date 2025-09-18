@@ -13,6 +13,7 @@ import java.util.List;
 
     @RestController
     @RequestMapping("/api/v1/categoria")
+    
 
     public class CategoriaController {
         List<Categoria> Categorias = new ArrayList<>();
@@ -22,7 +23,7 @@ import java.util.List;
             ca1.setId(1L);
             ca1.setNome("Alimentação");
             ca1.setDescricao("Serviços relacionados à produção, preparo e venda de alimentos, como marmitas, doces, bolos e catering.");
-            ca1.setStatusCategoria("ATIVO");
+            ca1.setStatusCategoria(true);
 
 
 

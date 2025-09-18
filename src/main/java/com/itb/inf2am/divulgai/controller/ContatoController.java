@@ -23,7 +23,7 @@ import java.util.List;
             c1.setId(1L);
             c1.setTipoContato("Instagram");
             c1.setLink("https://instagram.com/sicranaestetica");
-            c1.setStatusContato("ATIVO");
+            c1.setStatusContato(true);
 
 
 

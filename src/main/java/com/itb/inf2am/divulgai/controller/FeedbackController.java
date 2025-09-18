@@ -24,7 +24,7 @@ public class FeedbackController {
         f1.setId(1L);
         f1.setDescricao("O serviço Sicrana Estética é muito bom e acolhedor, parabéns.");
         f1.setDataCadastro(LocalDateTime.now());
-        f1.setStatusFeedback("ATIVO");
+        f1.setStatusFeedback(true);
 
 
 

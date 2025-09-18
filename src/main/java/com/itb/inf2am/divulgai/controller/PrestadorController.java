@@ -34,7 +34,7 @@ import java.util.List;
             p1.setBairro("Engenho Novo");
             p1.setCidade("Barueri");
             p1.setUf("SP");
-            p1.setStatusPrestador("ATIVO");
+            p1.setStatusPrestador(true);
 
 
 
