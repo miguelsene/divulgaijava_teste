@@ -2,27 +2,38 @@ package com.itb.inf2am.divulgai.model.entity;
 
 import java.time.LocalDateTime;
 import jakarta.persistence.*;
+
 @Entity
 @Table(name = "Usuario")
-
 public class Usuario {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length = 100, nullable = true)
-    private String nome;
-    @Column(length = 100, nullable = true)
-    private String email;
-    @Column(length = 100, nullable = true)
-    private String senha;
+
     @Column(length = 100, nullable = false)
-    private String nivelAcesso;
+    private String nome;
+
+    @Column(length = 100, nullable = false, unique = true)
+    private String email;
+
+    @Column(length = 100, nullable = false)
+    private String senha;
+
     @Column(length = 10, nullable = true)
-    private String foto;
-    @Column(length = 100, nullable = true)
+    private String nivelAcesso; // ADMIN, PRESTADOR, CLIENTE
+
+    @Lob
+    @Column(nullable = true)
+    private byte[] foto;
+
+    @Column(name = "dataCadastro", nullable = false)
     private LocalDateTime dataCadastro;
-    @Column(length = 20, nullable = false)
+
+    @Column
     private boolean statusUsuario;
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -64,11 +75,11 @@ public class Usuario {
         this.nivelAcesso = nivelAcesso;
     }
 
-    public String getFoto() {
+    public byte[] getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
+    public void setFoto(byte[] foto) {
         this.foto = foto;
     }
 
@@ -87,4 +98,5 @@ public class Usuario {
     public void setStatusUsuario(boolean statusUsuario) {
         this.statusUsuario = statusUsuario;
     }
+
 }
