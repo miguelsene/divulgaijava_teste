@@ -12,9 +12,6 @@ public class Categoria {
     @Column (length = 100, nullable = false)
     private String nome;
 
-    @Column (length = 200, nullable = false)
-    private String descricao;
-
     @Column (length = 20, nullable = false)
     private boolean statusCategoria;
 
@@ -34,13 +31,6 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
 
     public boolean isStatusCategoria() {
         return statusCategoria;

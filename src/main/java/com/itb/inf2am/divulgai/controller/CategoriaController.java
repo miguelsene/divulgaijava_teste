@@ -21,14 +21,30 @@ import java.util.List;
         public List<Categoria> findAll() {
             Categoria ca1 = new Categoria();
             ca1.setId(1L);
-            ca1.setNome("Alimentação");
-            ca1.setDescricao("Serviços relacionados à produção, preparo e venda de alimentos, como marmitas, doces, bolos e catering.");
+            ca1.setNome("Confeitaria");
             ca1.setStatusCategoria(true);
 
+            Categoria ca2 = new Categoria();
+            ca2.setId(2L);
+            ca2.setNome("Marmitaria");
+            ca2.setStatusCategoria(true);
 
+            Categoria ca3 = new Categoria();
+            ca3.setId(3L);
+            ca3.setNome("Buffet");
+            ca3.setStatusCategoria(true);
+
+            Categoria ca4 = new Categoria();
+            ca4.setId(1L);
+            ca4.setNome("Salgados");
+            ca4.setStatusCategoria(true);
 
             // Adicionando o produto
             Categorias.add(ca1);
+            Categorias.add(ca2);
+            Categorias.add(ca3);
+            Categorias.add(ca4);
+
 
             return Categorias;
         }

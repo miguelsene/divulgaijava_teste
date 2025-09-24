@@ -12,9 +12,6 @@ public class Servico {
     private String nome;
 
     @Column(length = 200, nullable = false)
-    private String descricao;
-
-    @Column(length = 200, nullable = false)
     private boolean statusServico;
 
     @Column(nullable = false) //REVISAR
@@ -34,14 +31,6 @@ public class Servico {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public boolean getStatusServico() {
