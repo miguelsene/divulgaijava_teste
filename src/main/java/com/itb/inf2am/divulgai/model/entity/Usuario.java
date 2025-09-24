@@ -27,8 +27,13 @@ public class Usuario {
     @Column(nullable = true)
     private byte[] foto;
 
-    @Column(name = "dataCadastro", nullable = false)
+    @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dataCadastro = LocalDateTime.now();
+    }
 
     @Column
     private boolean statusUsuario;
