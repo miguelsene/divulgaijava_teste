@@ -15,16 +15,17 @@ public class CategoriaService {
     private CategoriaRepository CategoriaRepository;
 
     // Método responsável em listar todos os Categorias cadastrados no banco de dados
-
+    //READ DO CRUD
     public List<Categoria> findAll() {
         return CategoriaRepository.findAll();
-
     }
 
     // Método responsável em Criar o Categoria no banco de dados
-
+    //CREATE DO CRUD
     public Categoria save(Categoria Categoria) {
         Categoria.setStatusCategoria(true);
         return CategoriaRepository.save(Categoria);
+
+
     }
 }
