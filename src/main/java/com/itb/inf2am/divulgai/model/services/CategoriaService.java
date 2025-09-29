@@ -18,14 +18,14 @@ public class CategoriaService {
     //READ DO CRUD
     public List<Categoria> findAll() {
 
-        return CategoriaRepository.findAll();
+        return categoriaRepository.findAll();
     }
 
     // Método responsável em Criar o Categoria no banco de dados
     //CREATE DO CRUD
     public Categoria save(Categoria Categoria) {
         Categoria.setStatusCategoria(true);
-        return CategoriaRepository.save(Categoria);
+        return categoriaRepository.save(Categoria);
     }
 
         // Método responsável em listar o produto por ID
