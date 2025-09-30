@@ -33,7 +33,7 @@
 
 
         @GetMapping("/{id}")
-        public ResponseEntity<Object> listarProdutoPorId(@PathVariable String id) {
+        public ResponseEntity<Object> listarCategoriaPorId(@PathVariable String id) {
             try {
                 return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
             } catch (NumberFormatException e) {
@@ -51,7 +51,7 @@
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
 
                 );
@@ -62,7 +62,7 @@
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> atualizarProduto(@PathVariable String id, @RequestBody Categoria categoria) {
+        public ResponseEntity<Object> atualizarCategoria(@PathVariable String id, @RequestBody Categoria categoria) {
             try {
                 return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
             } catch (NumberFormatException e) {
@@ -80,7 +80,7 @@
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
 
                 );
