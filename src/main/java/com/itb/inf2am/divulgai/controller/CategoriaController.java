@@ -92,11 +92,12 @@
         }
 
 
-
         @DeleteMapping("/{id}")
-        public ResponseEntity<Object> excluirProduto(@PathVariable String id, @RequestBody Categoria categoria) {
+        public ResponseEntity<Object> excluirCategoria(@PathVariable String id) {
             try {
-                return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
+                Long categoriaId = Long.parseLong(id);
+                categoriaService.delete(categoriaId); // chama o service
+                return ResponseEntity.ok(Map.of("message", "Categoria deletada com sucesso"));
             } catch (NumberFormatException e) {
                 return ResponseEntity.badRequest().body(
                         Map.of(
@@ -105,22 +106,16 @@
                                 "message", "O id informado não é válido: " + id
                         )
                 );
-
-
             } catch (RuntimeException e) {
                 return ResponseEntity.status(404).body(
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
-
                 );
-
             }
-
-
         }
-
     }
+
 
