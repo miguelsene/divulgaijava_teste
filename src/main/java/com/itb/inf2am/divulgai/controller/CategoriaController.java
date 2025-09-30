@@ -64,7 +64,14 @@
         @PutMapping("/{id}")
         public ResponseEntity<Object> atualizarCategoria(@PathVariable String id, @RequestBody Categoria categoria) {
             try {
-                return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
+                Long categoriaId = Long.parseLong(id);
+                Categoria categoriaExistente = categoriaService.findById(categoriaId); // já lança exceção se não achar
+
+                categoriaExistente.setNome(categoria.getNome());
+
+                Categoria categoriaAtualizada = categoriaService.save(categoriaExistente);
+
+                return ResponseEntity.ok(categoriaAtualizada);
             } catch (NumberFormatException e) {
                 return ResponseEntity.badRequest().body(
                         Map.of(
@@ -73,8 +80,6 @@
                                 "message", "O id informado não é válido: " + id
                         )
                 );
-
-
             } catch (RuntimeException e) {
                 return ResponseEntity.status(404).body(
                         Map.of(
@@ -82,13 +87,10 @@
                                 "error", "Not Found",
                                 "message", "Categoria não encontrada com o id " + id
                         )
-
                 );
-
             }
-
-
         }
+
 
 
         @DeleteMapping("/{id}")
