@@ -41,13 +41,6 @@ public class UsuarioController {
  // 3. Body: ( o objeto que será convertido em JSON/XML para o cliente )
 
  @PostMapping
- public ResponseEntity<Usuario> save(@RequestBody Usuario Usuario) {
-
-  Usuario newUsuario = UsuarioService.save(Usuario);
-  return ResponseEntity.status(HttpStatus.CREATED).body(newUsuario);
- }
-
- @PostMapping
  public Usuario create(@RequestBody Usuario usuario) {
   return usuarioService.save(usuario); // chama o service
  }
