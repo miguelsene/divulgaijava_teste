@@ -2,13 +2,15 @@
 package com.itb.inf2am.divulgai.controller;
 
 import com.itb.inf2am.divulgai.model.entity.Feedback;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.itb.inf2am.divulgai.model.services.FeedbackService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 // Getter (get): Apenas lê o valor do atributo.
 // Setter (set): Apenas modifica o valor do atributo.
@@ -17,22 +19,110 @@ import java.util.List;
 @RequestMapping("/api/v1/feedback")
 
 public class FeedbackController {
-    List<Feedback> Feedbacks = new ArrayList<>();
+
+
+
+    @Autowired
+    private FeedbackService feedbackService; // Service, não repository
+
     @GetMapping
     public List<Feedback> findAll() {
-        Feedback f1 = new Feedback();
-        f1.setId(1L);
-        f1.setDescricao("O serviço Sicrana Estética é muito bom e acolhedor, parabéns.");
-        f1.setDataCadastro(LocalDateTime.now());
-        f1.setStatusFeedback(true);
+        return feedbackService.findAll(); // chama o service
+    }
+
+    @PostMapping
+    public Feedback create(@RequestBody Feedback feedback) {
+        return feedbackService.save(feedback); // chama o service
+    }
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> listarFeedbackPorId(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(feedbackService.findById(Long.parseLong(id)));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body(
+                    Map.of(
+                            "status", 400,
+                            "error", "Bad Request",
+                            "message", "O id informado não é válido: " + id
+                    )
+            );
 
-        // Adicionando o produto
-        Feedbacks.add(f1);
 
-        return Feedbacks;
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(
+                    Map.of(
+                            "status", 404,
+                            "error", "Not Found",
+                            "message", "Categoria não encontrada com o id " + id
+                    )
+
+            );
+
+        }
+
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> atualizarFeedback(@PathVariable String id, @RequestBody Feedback feedback) {
+        try {
+            Long feedbackId = Long.parseLong(id);
+            Feedback feedbackExistente = feedbackService.findById(feedbackId); // já lança exceção se não achar
+
+            feedbackExistente.setDescricao(feedback.getDescricao());
+
+            Feedback feedbackAtualizada = feedbackService.save(feedbackExistente);
+
+            return ResponseEntity.ok(feedbackAtualizada);
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body(
+                    Map.of(
+                            "status", 400,
+                            "error", "Bad Request",
+                            "message", "O id informado não é válido: " + id
+                    )
+            );
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(
+                    Map.of(
+                            "status", 404,
+                            "error", "Not Found",
+                            "message", "Categoria não encontrada com o id " + id
+                    )
+            );
+        }
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> excluirFeedback(@PathVariable String id) {
+        try {
+            Long feedbackId = Long.parseLong(id);
+            feedbackService.delete(feedbackId); // chama o service
+            return ResponseEntity.ok(Map.of("message", "Categoria deletada com sucesso"));
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().body(
+                    Map.of(
+                            "status", 400,
+                            "error", "Bad Request",
+                            "message", "O id informado não é válido: " + id
+                    )
+            );
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(
+                    Map.of(
+                            "status", 404,
+                            "error", "Not Found",
+                            "message", "Feedback não encontrado com o id " + id
+                    )
+            );
+        }
     }
 }
+
+
+
 
 

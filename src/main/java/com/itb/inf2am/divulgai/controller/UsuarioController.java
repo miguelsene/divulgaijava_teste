@@ -1,79 +1,3 @@
-/* package com.itb.inf2am.divulgai.controller;
-
-import com.itb.inf2am.divulgai.model.entity.Usuario;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
-// id, nome, email, senha, nivelAcesso, foto, dataCadastro, statusUsuario;
-// Getter (get): Apenas lê o valor do atributo.
-// Setter (set): Apenas modifica o valor do atributo.
-
-@RestController
-@RequestMapping("/api/v1/usuario")
-
-public class UsuarioController {
- List<Usuario> usuarios = new ArrayList<>();
- @GetMapping
-    public List<Usuario> findAll() {
-     Usuario u1 = new Usuario();
-     u1.setId(1L);
-     u1.setNome("Fulano da Silva");
-     u1.setEmail("fulano@gmail.com");
-     u1.setSenha("MTIzNDU2Nzg=");
-     u1.setNivelAcesso("ADMIN");
-     u1.setFoto(null);
-     u1.setDataCadastro(LocalDateTime.now());
-     u1.setStatusUsuario("ATIVO");
-
-  Usuario u2 = new Usuario();
-  u2.setId(2L);
-  u2.setNome("Beltrana de Sá");
-  u2.setEmail("beltrana@gmail.com");
-  u2.setSenha("MTIzNDU2Nzg=");
-  u2.setNivelAcesso("USER");
-  u2.setFoto(null);
-  u2.setDataCadastro(LocalDateTime.now());
-  u2.setStatusUsuario("INATIVO");
-
-
-  Usuario u3 = new Usuario();
-  u3.setId(3L);
-  u3.setNome("Sicrana de Oliveira");
-  u3.setEmail("sicrana@gmail.com");
-  u3.setSenha("MTIzNDU2Nzg=");
-  u3.setNivelAcesso("PRESTADOR");
-  u3.setFoto(null);
-  u3.setDataCadastro(LocalDateTime.now());
-  u3.setStatusUsuario("ATIVO");
-
-  Usuario u4 = new Usuario();
-  u4.setId(4L);
-  u4.setNome("Ordnael Zurc");
-  u4.setEmail("ordnael@gmail.com");
-  u4.setSenha("MTIzNDU2Nzg=");
-  u4.setNivelAcesso("USER");
-  u4.setFoto(null);
-  u4.setDataCadastro(LocalDateTime.now());
-  u4.setStatusUsuario("TROCAR_SENHA");
-
-  // Adicionando o Usuario
-     usuarios.add(u1);
-  usuarios.add(u2);
-  usuarios.add(u3);
-          usuarios.add(u4);
-
-
-  return usuarios;
- }
-}
-*/
-
 package com.itb.inf2am.divulgai.controller;
 
 
@@ -86,6 +10,7 @@ package com.itb.inf2am.divulgai.controller;
 // aquele elemento deve ser tratado.
 
 import com.itb.inf2am.divulgai.model.entity.Usuario;
+import com.itb.inf2am.divulgai.model.entity.Usuario;
 import com.itb.inf2am.divulgai.model.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -94,18 +19,19 @@ import org.springframework.web.bind.annotation.*;
 
         import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/Usuario")
 public class UsuarioController {
 
  @Autowired
- private UsuarioService UsuarioService;
+ private UsuarioService usuarioService;
 
  @GetMapping
  public ResponseEntity<List<Usuario>> findAll() {
 
-  return ResponseEntity.ok(UsuarioService.findAll());
+  return ResponseEntity.ok(usuarioService.findAll());
  }
 
  // @RequestBody : Corpo da Requisição ( Recebendo um objeto JSON )
@@ -121,4 +47,95 @@ public class UsuarioController {
   return ResponseEntity.status(HttpStatus.CREATED).body(newUsuario);
  }
 
+ @PostMapping
+ public Usuario create(@RequestBody Usuario usuario) {
+  return usuarioService.save(usuario); // chama o service
+ }
+
+
+ @GetMapping("/{id}")
+ public ResponseEntity<Object> listarUsuarioPorId(@PathVariable String id) {
+  try {
+   return ResponseEntity.ok(usuarioService.findById(Long.parseLong(id)));
+  } catch (NumberFormatException e) {
+   return ResponseEntity.badRequest().body(
+           Map.of(
+                   "status", 400,
+                   "error", "Bad Request",
+                   "message", "O id informado não é válido: " + id
+           )
+   );
+
+
+  } catch (RuntimeException e) {
+   return ResponseEntity.status(404).body(
+           Map.of(
+                   "status", 404,
+                   "error", "Not Found",
+                   "message", "Usuario não encontrada com o id " + id
+           )
+
+   );
+
+  }
+
+
+ }
+
+ @PutMapping("/{id}")
+ public ResponseEntity<Object> atualizarUsuario(@PathVariable String id, @RequestBody Usuario usuario) {
+  try {
+   Long usuarioId = Long.parseLong(id);
+   Usuario usuarioExistente = usuarioService.findById(usuarioId); // já lança exceção se não achar
+
+   usuarioExistente.setNome(usuario.getNome());
+
+   Usuario usuarioAtualizada = usuarioService.save(usuarioExistente);
+
+   return ResponseEntity.ok(usuarioAtualizada);
+  } catch (NumberFormatException e) {
+   return ResponseEntity.badRequest().body(
+           Map.of(
+                   "status", 400,
+                   "error", "Bad Request",
+                   "message", "O id informado não é válido: " + id
+           )
+   );
+  } catch (RuntimeException e) {
+   return ResponseEntity.status(404).body(
+           Map.of(
+                   "status", 404,
+                   "error", "Not Found",
+                   "message", "Usuario não encontrada com o id " + id
+           )
+   );
+  }
+ }
+
+
+ @DeleteMapping("/{id}")
+ public ResponseEntity<Object> excluirUsuario(@PathVariable String id) {
+  try {
+   Long usuarioId = Long.parseLong(id);
+   usuarioService.delete(usuarioId); // chama o service
+   return ResponseEntity.ok(Map.of("message", "Usuario deletada com sucesso"));
+  } catch (NumberFormatException e) {
+   return ResponseEntity.badRequest().body(
+           Map.of(
+                   "status", 400,
+                   "error", "Bad Request",
+                   "message", "O id informado não é válido: " + id
+           )
+   );
+  } catch (RuntimeException e) {
+   return ResponseEntity.status(404).body(
+           Map.of(
+                   "status", 404,
+                   "error", "Not Found",
+                   "message", "Usuario não encontrada com o id " + id
+           )
+   );
+  }
+ }
 }
+

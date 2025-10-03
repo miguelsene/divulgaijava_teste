@@ -1,6 +1,7 @@
 package com.itb.inf2am.divulgai.model.services;
 
 
+import com.itb.inf2am.divulgai.model.entity.Categoria;
 import com.itb.inf2am.divulgai.model.entity.Usuario;
 import com.itb.inf2am.divulgai.model.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,29 @@ public class UsuarioService {
     public Usuario save(Usuario usuario) {
         usuario.setStatusUsuario(true);
         return usuarioRepository.save(usuario);
+    }
+
+
+    // Método responsável em listar o usuario por ID
+    public Usuario findById (Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado com o id " + id));
+    }
+
+    // Método responsável em atualizar em atualizar a usuario
+    public Usuario update(Long id, Usuario usuario) {
+        Usuario usuarioExistente = findById(id);
+        usuarioExistente.setNome(usuario.getNome());
+        usuarioExistente.setStatusUsuario(usuario.getStatusUsuario());
+
+        return usuarioRepository.save(usuarioExistente);
+    }
+
+    // Método responsável em excluir a usuario ( exclusão física )
+    public void delete(Long id) {
+
+
+        Usuario usuarioExistente = findById(id);
+        usuarioRepository.delete(usuarioExistente);
     }
 }
