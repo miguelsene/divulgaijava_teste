@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
@@ -17,15 +17,11 @@ public class Usuario {
     @Column(length = 100, nullable = false, unique = true)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 255, nullable = false)
     private String senha;
 
-    @Column(length = 10, nullable = true)
-    private String nivelAcesso; // ADMIN, PRESTADOR, CLIENTE
-
-    @Lob
-    @Column(nullable = true)
-    private byte[] foto;
+    @Column(name = "tipo_usuario", length = 20, nullable = false)
+    private String tipoUsuario = "casual";
 
     @Column(name = "data_cadastro", nullable = false)
     private LocalDateTime dataCadastro;
@@ -34,9 +30,6 @@ public class Usuario {
     protected void onCreate() {
         this.dataCadastro = LocalDateTime.now();
     }
-
-    @Column
-    private boolean statusUsuario;
 
     // Getters e Setters
 
@@ -72,20 +65,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getNivelAcesso() {
-        return nivelAcesso;
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setNivelAcesso(String nivelAcesso) {
-        this.nivelAcesso = nivelAcesso;
-    }
-
-    public byte[] getFoto() {
-        return foto;
-    }
-
-    public void setFoto(byte[] foto) {
-        this.foto = foto;
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public LocalDateTime getDataCadastro() {
@@ -96,12 +81,6 @@ public class Usuario {
         this.dataCadastro = dataCadastro;
     }
 
-    public boolean getStatusUsuario() {
-        return statusUsuario;
-    }
 
-    public void setStatusUsuario(boolean statusUsuario) {
-        this.statusUsuario = statusUsuario;
-    }
 
 }

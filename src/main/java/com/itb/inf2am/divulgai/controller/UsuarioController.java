@@ -41,8 +41,20 @@ public class UsuarioController {
  // 3. Body: ( o objeto que será convertido em JSON/XML para o cliente )
 
  @PostMapping
- public Usuario create(@RequestBody Usuario usuario) {
-  return usuarioService.save(usuario); // chama o service
+ public ResponseEntity<Object> create(@RequestBody Usuario usuario) {
+  if (usuarioService.emailExiste(usuario.getEmail())) {
+   return ResponseEntity.badRequest().body(Map.of("message", "Email já cadastrado"));
+  }
+  return ResponseEntity.ok(usuarioService.save(usuario));
+ }
+ 
+ @PostMapping("/login")
+ public ResponseEntity<Object> login(@RequestBody Map<String, String> dados) {
+  Usuario usuario = usuarioService.login(dados.get("email"), dados.get("senha"));
+  if (usuario != null) {
+   return ResponseEntity.ok(usuario);
+  }
+  return ResponseEntity.status(401).body(Map.of("message", "Email ou senha incorretos"));
  }
 
 
@@ -82,6 +94,9 @@ public class UsuarioController {
    Usuario usuarioExistente = usuarioService.findById(usuarioId); // já lança exceção se não achar
 
    usuarioExistente.setNome(usuario.getNome());
+   usuarioExistente.setEmail(usuario.getEmail());
+   usuarioExistente.setSenha(usuario.getSenha());
+   usuarioExistente.setTipoUsuario(usuario.getTipoUsuario());
 
    Usuario usuarioAtualizada = usuarioService.save(usuarioExistente);
 
