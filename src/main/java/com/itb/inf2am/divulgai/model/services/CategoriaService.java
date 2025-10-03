@@ -14,27 +14,27 @@ public class CategoriaService {
     @Autowired       // Injeção de dependência
     private CategoriaRepository categoriaRepository;
 
-    // Método responsável em listar todos os Categorias cadastrados no banco de dados
+    // Método responsável em listar todos as Categorias cadastradas no banco de dados
     //READ DO CRUD
     public List<Categoria> findAll() {
 
         return categoriaRepository.findAll();
     }
 
-    // Método responsável em Criar o Categoria no banco de dados
+    // Método responsável em criar a Categoria no banco de dados
     //CREATE DO CRUD
     public Categoria save(Categoria Categoria) {
         Categoria.setStatusCategoria(true);
         return categoriaRepository.save(Categoria);
     }
 
-        // Método responsável em listar o produto por ID
+        // Método responsável em listar o categoria por ID
         public Categoria findById (Long id) {
             return categoriaRepository.findById(id)
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado com o id " + id));
         }
 
-        // Método responsável em atualizar em atualizar o produto
+        // Método responsável em atualizar em atualizar a categoria
         public Categoria update(Long id, Categoria categoria) {
             Categoria categoriaExistente = findById(id);
             categoriaExistente.setNome(categoria.getNome());
@@ -43,7 +43,7 @@ public class CategoriaService {
             return categoriaRepository.save(categoriaExistente);
         }
 
-        // Método responsável em excluir o produto ( exclusão física )
+        // Método responsável em excluir a categoria ( exclusão física )
         public void delete(Long id) {
 
 

@@ -33,7 +33,7 @@
 
 
         @GetMapping("/{id}")
-        public ResponseEntity<Object> listarProdutoPorId(@PathVariable String id) {
+        public ResponseEntity<Object> listarCategoriaPorId(@PathVariable String id) {
             try {
                 return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
             } catch (NumberFormatException e) {
@@ -51,7 +51,7 @@
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
 
                 );
@@ -62,9 +62,16 @@
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<Object> atualizarProduto(@PathVariable String id, @RequestBody Categoria categoria) {
+        public ResponseEntity<Object> atualizarCategoria(@PathVariable String id, @RequestBody Categoria categoria) {
             try {
-                return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
+                Long categoriaId = Long.parseLong(id);
+                Categoria categoriaExistente = categoriaService.findById(categoriaId); // já lança exceção se não achar
+
+                categoriaExistente.setNome(categoria.getNome());
+
+                Categoria categoriaAtualizada = categoriaService.save(categoriaExistente);
+
+                return ResponseEntity.ok(categoriaAtualizada);
             } catch (NumberFormatException e) {
                 return ResponseEntity.badRequest().body(
                         Map.of(
@@ -73,28 +80,24 @@
                                 "message", "O id informado não é válido: " + id
                         )
                 );
-
-
             } catch (RuntimeException e) {
                 return ResponseEntity.status(404).body(
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
-
                 );
-
             }
-
-
         }
 
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<Object> excluirProduto(@PathVariable String id, @RequestBody Categoria categoria) {
+        public ResponseEntity<Object> excluirCategoria(@PathVariable String id) {
             try {
-                return ResponseEntity.ok(categoriaService.findById(Long.parseLong(id)));
+                Long categoriaId = Long.parseLong(id);
+                categoriaService.delete(categoriaId); // chama o service
+                return ResponseEntity.ok(Map.of("message", "Categoria deletada com sucesso"));
             } catch (NumberFormatException e) {
                 return ResponseEntity.badRequest().body(
                         Map.of(
@@ -103,22 +106,16 @@
                                 "message", "O id informado não é válido: " + id
                         )
                 );
-
-
             } catch (RuntimeException e) {
                 return ResponseEntity.status(404).body(
                         Map.of(
                                 "status", 404,
                                 "error", "Not Found",
-                                "message", "Produto não encontrado com o id " + id
+                                "message", "Categoria não encontrada com o id " + id
                         )
-
                 );
-
             }
-
-
         }
-
     }
+
 
